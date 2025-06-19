@@ -7,7 +7,7 @@ let timeout = 20;
 
 let span = document.getElementById("span");
 let div = document.getElementById("main");
-let maxTries = 3;
+let maxTries = 500;
 const nameOfTriesInLocalStorage = "currentTries";
 
 
