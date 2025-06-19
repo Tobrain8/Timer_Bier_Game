@@ -3,7 +3,7 @@ let interval;
 
 let goal = "10.00";
 let decimalsToShow = getDecimals(goal);
-let timeout = 10;
+let timeout = 20;
 
 let span = document.getElementById("span");
 let div = document.getElementById("main");
@@ -86,4 +86,5 @@ window.onload = () => {
 	document.getElementById("span").innerHTML = time.toFixed(decimalsToShow);
 	document.getElementById("tries").innerHTML = getTries() + 1 + "/" + maxTries;
 	document.getElementById("notifications").innerHTML = goal + " Sekunden Challenge!";
+	alert("Achtung: Versuche im Incognito/Privatem-Fenster zählen nicht.")
 }
