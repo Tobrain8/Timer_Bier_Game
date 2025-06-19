@@ -86,5 +86,5 @@ window.onload = () => {
 	document.getElementById("span").innerHTML = time.toFixed(decimalsToShow);
 	document.getElementById("tries").innerHTML = getTries() + 1 + "/" + maxTries;
 	document.getElementById("notifications").innerHTML = goal + " Sekunden Challenge!";
-	alert("Achtung: Versuche im Incognito/Privatem-Fenster zählen nicht.")
+	alert("Hinweis: Bitte beachte, dass Versuche im Inkognito- bzw. privaten Modus nicht gewertet werden.\n\nWir bitten dich außerdem, fair zu bleiben und das Spiel nicht auszutricksen oder absichtlich zu manipulieren. Sollte das wiederholt vorkommen, sehen wir uns leider gezwungen, das Spiel einzustellen und das wäre schade für alle.\nVielen Dank für dein Verständnis und viel Spaß beim Spielen! :(")
 }
