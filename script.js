@@ -3,12 +3,12 @@ let interval;
 
 let goal = "20.25";
 let decimalsToShow = getDecimals(goal);
-let timeout = 0;
+let timeout = 10;
 
 let span = document.getElementById("span");
 let div = document.getElementById("main");
-let tries = 0;
 let maxTries = 3;
+const nameOfTriesInLocalStorage = "currentTries";
 
 
 if(localStorage.getItem("time") == null){
@@ -35,23 +35,23 @@ function startTimer(reset = false){
 	if(!confirm("Wirklich reseten??"))return
 	div.onclick = ()=>{startTimer()}
 	div.style.backgroundColor = "white"
-	tries = 5;
+	setTries(maxTries);
 	}
 
 
-	if(parseInt(localStorage.getItem("time")) > Date.now())
+	if(parseInt(localStorage.getItem("timeOfNextTries")) > Date.now())
 	return notify("Du musst noch " + ((localStorage.getItem("time")-Date.now())/60/1000).toFixed(0)  + " Minuten warten")
 
-	if(tries >= maxTries){
-	localStorage.setItem("time", Date.now()+timeout*60*1000);
-	tries = 0;
+	if(getTries() >= maxTries){
+	localStorage.setItem("timeOfNextTries", Date.now()+timeout*60*1000);
+	setTries(0);
 	return notify("In " + timeout + " Minuten kannst du es wieder versuchen")
 	}
 
 	if(!timeRuns){
 	div.style.backgroundColor = "white"
 	timeRuns = true;
-	document.getElementById("tries").innerHTML = tries+1 + "/" + maxTries;
+	document.getElementById("tries").innerHTML = getTries() + 1 + "/" + maxTries;
 	let startTime = Date.now();
 	let time;
 	interval = setInterval(()=>{
@@ -62,7 +62,7 @@ function startTimer(reset = false){
 	else{
 	clearInterval(interval);
 	timeRuns = false;
-	tries++
+	setTries(getTries() + 1)
 	if(span.innerHTML == goal){
 		div.style.backgroundColor = "lightgreen";
 		notify("Hol dir dein Freibier ab!!!")
@@ -71,9 +71,20 @@ function startTimer(reset = false){
 	}
 }
 
+function getTries() {
+	let tries = localStorage.getItem(nameOfTriesInLocalStorage);
+	return tries ? parseInt(JSON.parse(tries)) : maxTries;
+}
+
+function setTries(num) {
+	localStorage.setItem(nameOfTriesInLocalStorage, JSON.stringify(num))
+}
+
 window.onload = () => {
+	if(!localStorage.getItem(nameOfTriesInLocalStorage))
+		localStorage.setItem(nameOfTriesInLocalStorage, JSON.stringify(0))
 	let time = 0;
 	document.getElementById("span").innerHTML = time.toFixed(decimalsToShow);
-	document.getElementById("tries").innerHTML = tries+1 + "/" + maxTries;
+	document.getElementById("tries").innerHTML = getTries() + 1 + "/" + maxTries;
 	document.getElementById("notifications").innerHTML = goal + " Sekunden Challenge!";
 }
