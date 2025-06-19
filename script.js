@@ -1,7 +1,7 @@
 let timeRuns = false;
 let interval;
 
-let goal = "4.2";
+let goal = "20.25";
 let decimalsToShow = getDecimals(goal);
 let timeout = 0;
 
@@ -25,7 +25,7 @@ function notify(note){
 	let notification = document.getElementById("notifications");
 	notification.innerHTML = note;
 	setTimeout(()=>{
-	document.getElementById("notifications").innerHTML = goal + " Challenge!";
+	document.getElementById("notifications").innerHTML = goal + " Sekunden Challenge!";
 	}, 5000)
 }
 
@@ -75,5 +75,5 @@ window.onload = () => {
 	let time = 0;
 	document.getElementById("span").innerHTML = time.toFixed(decimalsToShow);
 	document.getElementById("tries").innerHTML = tries+1 + "/" + maxTries;
-	document.getElementById("notifications").innerHTML = goal + " Challenge!";
+	document.getElementById("notifications").innerHTML = goal + " Sekunden Challenge!";
 }
