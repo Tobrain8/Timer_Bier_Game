@@ -1,15 +1,14 @@
-let timeRuns = false;
 let interval;
-
-let goal = "10.80";
-let decimalsToShow = getDecimals(goal);
-let timeout = 20;
-
-let span = document.getElementById("span");
-let div = document.getElementById("main");
-let maxTries = 500;
+let timeRuns = false;
+const decimalsToShow = getDecimals(goal);
 const nameOfTriesInLocalStorage = "currentTries";
 
+const goal = "10.80";
+const maxTries = 3;
+const timeout = 20;
+
+const span = document.getElementById("span");
+const div = document.getElementById("main");
 
 if(localStorage.getItem("time") == null){
 	localStorage.setItem("time", Date.now())
@@ -86,5 +85,5 @@ window.onload = () => {
 	document.getElementById("span").innerHTML = time.toFixed(decimalsToShow);
 	document.getElementById("tries").innerHTML = getTries() + 1 + "/" + maxTries;
 	document.getElementById("notifications").innerHTML = goal + " Sekunden Challenge!";
-	alert("Hinweis: Bitte beachte, dass Versuche im Inkognito- bzw. privaten Modus nicht gewertet werden.\n\nWir bitten dich außerdem, fair zu bleiben und das Spiel nicht auszutricksen oder absichtlich zu manipulieren. Sollte das wiederholt vorkommen, sehen wir uns leider gezwungen, das Spiel einzustellen und das wäre schade für alle :(\nVielen Dank für dein Verständnis und viel Spaß beim Spielen!")
+	alert("Hinweis: Bitte beachte, dass Versuche im Inkognito- bzw. privaten Modus nicht gewertet werden.\n\nWir bitten dich außerdem, fair zu bleiben und das Spiel nicht auszutricksen oder absichtlich zu manipulieren. Sollte das wiederholt vorkommen, sehen wir uns leider gezwungen, das Spiel einzustellen und das wäre schade für alle :(\n\nVielen Dank für dein Verständnis und viel Spaß beim Spielen!")
 }
