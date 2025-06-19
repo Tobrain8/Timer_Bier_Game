@@ -1,7 +1,7 @@
 let timeRuns = false;
 let interval;
 
-let goal = "10.00";
+let goal = "10.80";
 let decimalsToShow = getDecimals(goal);
 let timeout = 20;
 
