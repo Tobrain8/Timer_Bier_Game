@@ -1,7 +1,7 @@
 let timeRuns = false;
 let interval;
 
-let goal = "20.25";
+let goal = "10.00";
 let decimalsToShow = getDecimals(goal);
 let timeout = 10;
 
@@ -38,9 +38,8 @@ function startTimer(reset = false){
 	setTries(maxTries);
 	}
 
-
 	if(parseInt(localStorage.getItem("timeOfNextTries")) > Date.now())
-	return notify("Du musst noch " + ((localStorage.getItem("time")-Date.now())/60/1000).toFixed(0)  + " Minuten warten")
+	return notify("Du musst noch " + ((localStorage.getItem("timeOfNextTries")-Date.now())/60/1000).toFixed(0)  + " Minuten warten")
 
 	if(getTries() >= maxTries){
 	localStorage.setItem("timeOfNextTries", Date.now()+timeout*60*1000);
