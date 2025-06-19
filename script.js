@@ -1,11 +1,11 @@
+const goal = "10.80";
+const maxTries = 3;
+const timeout = 20;
+
 let interval;
 let timeRuns = false;
 const decimalsToShow = getDecimals(goal);
 const nameOfTriesInLocalStorage = "currentTries";
-
-const goal = "10.80";
-const maxTries = 3;
-const timeout = 20;
 
 const span = document.getElementById("span");
 const div = document.getElementById("main");
