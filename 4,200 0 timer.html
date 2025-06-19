@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Freibier</title>
+</head>
+
+<body>
+  <div id="main" onclick="startTimer()">
+    <span id="tries">1/3</span>
+    <span id="notifications">4.200 Challenge</span>
+    <div id="center">
+      <span id="span">0.000</span>
+    </div>
+  </div>
+
+
+
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    #main{
+      height: 100%;
+      width: 100%;
+    }
+
+    #span{
+      font-size: 50pt;
+    }
+
+    #center{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #tries{
+      position: absolute;
+      top: 4%;
+      left: 6%;
+      font-size: 15pt;
+    }
+
+    #notifications{
+      position: absolute;
+      top: 10%;
+      left: 6%;
+      font-size: 15pt;
+    }
+  </style>
+
+
+  
+
+  
+  <script>
+    let timeRuns = false;
+    let interval;
+
+    let goal = "4.200";
+    let timeout = 0;
+
+    let span = document.getElementById("span");
+    let div = document.getElementById("main");
+    let tries = 0;
+    let maxTries = 3;
+
+
+    if(localStorage.getItem("time") == null){
+      localStorage.setItem("time", Date.now())
+    }
+
+    function notify(note){
+      let notification = document.getElementById("notifications");
+      notification.innerHTML = note;
+      setTimeout(()=>{
+        document.getElementById("notifications").innerHTML = "4.20 Challenge!";
+      }, 5000)
+    }
+
+
+    function startTimer(reset = false){
+      if(reset){
+        if(!confirm("Wirklich reseten??"))return
+        div.onclick = ()=>{startTimer()}
+        tries = 5;
+      }
+
+
+      if(parseInt(localStorage.getItem("time")) > Date.now())
+        return notify("Du musst noch " + ((localStorage.getItem("time")-Date.now())/60/1000).toFixed(0)  + " Minuten warten")
+
+      if(tries >= maxTries){
+        localStorage.setItem("time", Date.now()+timeout*60*1000);
+        tries = 0;
+        return notify("In " + timeout + " Minuten kannst du es wieder versuchen")
+      }
+
+      if(!timeRuns){
+        div.style.backgroundColor = "white"
+        timeRuns = true;
+        document.getElementById("tries").innerHTML = tries+1 + "/" + maxTries;
+        let startTime = Date.now();
+        let time;
+        interval = setInterval(()=>{
+          time = (Date.now() - startTime)/1000;
+          document.getElementById("span").innerHTML = time.toFixed(3);
+        }, 10);
+      }
+      else{
+        clearInterval(interval);
+        timeRuns = false;
+        tries++
+        if(span.innerHTML == goal){
+          div.style.backgroundColor = "lightgreen";
+          notify("Hol dir dein Freibier ab!!!")
+          div.onclick = ()=>{startTimer(true)}
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
